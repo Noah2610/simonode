@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import promptSync from "prompt-sync";
-import { getMeta } from "./util";
+import { getMeta } from "./util.js";
 
 const prompt = promptSync({ sigint: true });
 

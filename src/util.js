@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import fs from "fs";
 
 export function err(msg) {
@@ -12,7 +13,7 @@ export function getMeta() {
 }
 
 function readMeta() {
-    const file = new URL("./package.json", import.meta.url)
+    const file = new URL("../package.json", import.meta.url)
         .pathname;
 
     try {
