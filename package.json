@@ -1,11 +1,14 @@
 {
-    "name": "simon-node",
+    "name": "simonode",
     "version": "1.0.0",
-    "description": "",
+    "description": "A simple, little Simon game in your console!",
     "main": "index.js",
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "keywords": [
+        "game",
+        "simon"
+    ],
+    "author": "Noah Rosenzweig <rosenzweig.noah@gmail.com>",
+    "license": "MIT",
     "type": "module",
     "scripts": {
         "start": "node ./index.js"
