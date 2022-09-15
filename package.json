@@ -2,14 +2,18 @@
     "name": "simonode",
     "version": "1.0.0",
     "description": "A simple, little Simon game in your console!",
+    "author": "Noah Rosenzweig <rosenzweig.noah@gmail.com>",
+    "license": "MIT",
     "main": "src/index.js",
+    "type": "module",
+    "files": [
+        "src"
+    ],
     "keywords": [
         "game",
         "simon"
     ],
-    "author": "Noah Rosenzweig <rosenzweig.noah@gmail.com>",
-    "license": "MIT",
-    "type": "module",
+    "repository": "github:Noah2610/simonode",
     "scripts": {
         "start": "node ./src/index.js"
     },
