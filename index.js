@@ -37,6 +37,7 @@ function run() {
         const color = genColor();
         pattern.push(color);
 
+        console.clear();
         console.log(`New color: ${color}`);
 
         for (let i = 0; i < pattern.length; ) {
