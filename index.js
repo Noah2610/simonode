@@ -111,6 +111,10 @@ function run() {
                 const targetColor = pattern[i];
                 const inputColor = inputColors[j];
 
+                if (!targetColor) {
+                    break;
+                }
+
                 if (
                     !isTargetColor(targetColor, inputColor)
                 ) {
