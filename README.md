@@ -7,5 +7,9 @@ Install and play with [npx]:
 npx simonode
 ```
 
-[simon]: https://en.wikipedia.org/wiki/Simon_(game)
-[npx]:   https://www.npmjs.com/package/npx
+## Screenshot
+![screenshot]
+
+[screenshot]: ./screenshot.png
+[simon]:      https://en.wikipedia.org/wiki/Simon_(game)
+[npx]:        https://www.npmjs.com/package/npx
