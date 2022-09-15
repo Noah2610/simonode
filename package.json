@@ -1,0 +1,15 @@
+{
+    "name": "simon-node",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "scripts": {
+        "start": "node ./index.js"
+    },
+    "dependencies": {
+        "prompt-sync": "^4.2.0"
+    }
+}
