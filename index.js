@@ -1,7 +1,8 @@
 import chalk from "chalk";
+import fs from "fs";
 import promptSync from "prompt-sync";
 
-const APPNAME = "Simon Game";
+const META = getMeta();
 
 const prompt = promptSync({ sigint: true });
 
@@ -18,6 +19,42 @@ const COLORS = [
     Color.blue,
     Color.yellow,
 ];
+
+function main() {
+    printInstructions();
+    const result = run();
+    gameOver(result);
+}
+
+function getMeta() {
+    const file = new URL("./package.json", import.meta.url)
+        .pathname;
+
+    try {
+        const raw = fs.readFileSync(file, {
+            encoding: "utf8",
+        });
+        const obj = JSON.parse(raw);
+        return {
+            name: obj.name,
+            version: obj.version,
+            author:
+                (obj.author.split("<")[0] || "").trim() ||
+                undefined,
+        };
+    } catch (e) {
+        err(
+            `Failed reading file ${chalk.bold(
+                file,
+            )}\n${JSON.stringify(e, null, 2)}`,
+        );
+    }
+}
+
+function err(msg) {
+    console.error(`${chalk.bold.red("[Error]")}\n${msg}`);
+    process.exit(1);
+}
 
 function genColor() {
     return COLORS[
@@ -46,16 +83,13 @@ function displayColor(color) {
     return chalk[color](color.toUpperCase());
 }
 
-function main() {
-    printInstructions();
-    const result = run();
-    gameOver(result);
-}
-
 function printInstructions() {
     prompt(
         [
-            chalk.bgWhite.black.bold(APPNAME),
+            chalk.bgWhite.black.bold(META.name) +
+                chalk.bold(` v${META.version}`) +
+                " by " +
+                chalk.bold(META.author),
             "Play Simon in your console!",
             `Each round, you will be given a ${chalk.bold(
                 "color",
