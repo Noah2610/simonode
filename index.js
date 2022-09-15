@@ -1,6 +1,8 @@
 import chalk from "chalk";
 import promptSync from "prompt-sync";
 
+const APPNAME = "Simon Game";
+
 const prompt = promptSync({ sigint: true });
 
 const Color = {
@@ -27,7 +29,7 @@ function promptGuesses(msg = "> ") {
     return prompt(msg)
         .toLowerCase()
         .trim()
-        .split(/,|\s+/)
+        .split("") // /,|\s+/
         .map((s) => s.trim())
         .filter(isValidColor);
 }
@@ -45,11 +47,37 @@ function displayColor(color) {
 }
 
 function main() {
+    printInstructions();
     const result = run();
     gameOver(result);
 }
 
+function printInstructions() {
+    prompt(
+        [
+            chalk.bgWhite.black.bold(APPNAME),
+            "Play Simon in your console!",
+            `Each round, you will be given a ${chalk.bold(
+                "color",
+            )} to memorize.`,
+            "You will have to enter the full pattern of all colors to keep playing.",
+            "You lose when you input a wrong color.",
+            "To input colors, simply type the letters corresponding to these colors:",
+            "  " +
+                COLORS.map(
+                    (c) =>
+                        `${chalk.bold(
+                            c[0],
+                        )} - ${displayColor(c)}`,
+                ).join("\n  "),
+            "Press ENTER to play!\n",
+        ].join("\n"),
+        { echo: "" },
+    );
+}
+
 function gameOver({ score, pattern }) {
+    console.clear();
     console.log(
         [
             chalk.bold.bgRed.black("Game Over!"),
