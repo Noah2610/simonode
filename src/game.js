@@ -1,5 +1,6 @@
 import chalk from "chalk";
 import promptSync from "prompt-sync";
+import { getHighscore, setHighscore } from "./savefile.js";
 import { getMeta } from "./util.js";
 
 const prompt = promptSync({ sigint: true });
@@ -7,7 +8,12 @@ const prompt = promptSync({ sigint: true });
 export function play() {
     printInstructions();
     const result = run();
-    gameOver(result);
+    const highscore = getHighscore();
+    gameOver({ ...result, highscore });
+
+    if (highscore !== null && result.score > highscore) {
+        setHighscore(result.score);
+    }
 }
 
 const Color = {
@@ -119,12 +125,22 @@ function printInstructions() {
     );
 }
 
-function gameOver({ score, pattern }) {
+function gameOver({ score, highscore, pattern }) {
+    const hasHighscore = highscore !== null;
+    const isHighscore = hasHighscore && score > highscore;
+
     console.clear();
     console.log(
         [
             chalk.bold.bgRed.black("Game Over!"),
-            `Score: ${chalk.bold.bgGreen.black(score)}`,
+            `Score: ${chalk.bold.green(score)}` +
+                (isHighscore
+                    ? chalk.green(` NEW HIGHSCORE`)
+                    : hasHighscore
+                    ? ` Highscore: ${chalk.bold.green(
+                          highscore,
+                      )}`
+                    : ""),
             "Pattern:",
             "  " + pattern.map(displayColor).join("\n  "),
         ].join("\n"),
